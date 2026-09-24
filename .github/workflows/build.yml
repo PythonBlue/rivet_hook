@@ -5,8 +5,8 @@
 name: Build
 
 on:
-  push:
-    branches: [ stable ]
+  workflow_dispatch:
+    branches: [ develop ]
 
 jobs:
   build:
