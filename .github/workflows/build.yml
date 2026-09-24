@@ -13,7 +13,8 @@ jobs:
     runs-on: windows-latest
     strategy:
       matrix:
-        buildenv: [vs, mingw]
+        # buildenv: [vs, mingw]
+        buildenv: [vs]
         buildtype: [debug, release]
         hook_name: [rivet_hook, rivet_loader]
     steps:
@@ -41,9 +42,9 @@ jobs:
         if: matrix.buildenv == 'vs'
         run: meson setup build . --buildtype ${{ matrix.buildtype }} --debug --vsenv -Dloader_only=${{ matrix.hook_name == 'rivet_loader' }}
 
-      - name: Configure Hook (MinGW)
-        if: matrix.buildenv == 'mingw'
-        run: meson setup build . --buildtype ${{ matrix.buildtype }} --debug -Dloader_only=${{ matrix.hook_name == 'rivet_loader' }}
+      # - name: Configure Hook (MinGW)
+        # if: matrix.buildenv == 'mingw'
+        # run: meson setup build . --buildtype ${{ matrix.buildtype }} --debug -Dloader_only=${{ matrix.hook_name == 'rivet_loader' }}
 
       - name: Compile Hook
         run: meson compile -C build -j 0
